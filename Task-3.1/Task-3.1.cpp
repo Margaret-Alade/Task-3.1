@@ -6,31 +6,34 @@
 
 
 class Calculator {
-public:
+
+private:
     double num1;
     double num2;
 
-    double add(double num1, double num2) {
+public:
+
+    double add() {
         return num1 + num2;
     }
 
-    double multiply(double num1, double num2) {
+    double multiply() {
         return num1 * num2;
     }
 
-    double substract_1_2(double num1, double num2) {
+    double substract_1_2() {
         return num1 - num2;
     }
 
-    double substract_2_1(double num1, double num22) {
+    double substract_2_1() {
         return num2 - num1;
     }
 
-    double divide_1_2(double num1, double num2) {
+    double divide_1_2() {
         return num1 / num2;
     }
 
-    double divide_2_1(double num1, double num2) {
+    double divide_2_1() {
         return num2 / num1;
     }
 
@@ -39,6 +42,7 @@ public:
             return false;
         }
         else {
+            this->num1 = num1;
             return true;
         }
     }
@@ -48,6 +52,7 @@ public:
             return false;
         }
         else {
+            this->num2 = num2;
             return true;
         }
     }
@@ -56,23 +61,19 @@ public:
 
 };
 
-void print_user_calc(Calculator& user_calc) {
+void print_user_calc(Calculator user_calc, int num1, int num2) {
 
-    if (user_calc.set_num1(user_calc.num1) == true && user_calc.set_num2(user_calc.num2) == true) {
+    std::cout << "num1 + num2 = " << user_calc.add() << '\n';
 
-        std::cout << "num1 + num2 = " << user_calc.add(user_calc.num1, user_calc.num2) << '\n';
+    std::cout << "num1 - num2 = " << user_calc.substract_1_2() << '\n';
 
-        std::cout << "num1 - num2 = " << user_calc.substract_1_2(user_calc.num1, user_calc.num2) << '\n';
+    std::cout << "num2 - num1 = " << user_calc.substract_2_1() << '\n';
 
-        std::cout << "num2 - num1 = " << user_calc.substract_2_1(user_calc.num1, user_calc.num2) << '\n';
+    std::cout << "num1 * num2 = " << user_calc.multiply() << '\n';
 
-        std::cout << "num1 * num2 = " << user_calc.multiply(user_calc.num1, user_calc.num2) << '\n';
+    std::cout << "num1 / num2 = " << user_calc.divide_1_2() << '\n';
 
-        std::cout << "num1 / num2 = " << user_calc.divide_1_2(user_calc.num1, user_calc.num2) << '\n';
-
-        std::cout << "num2 / num1 = " << user_calc.divide_2_1(user_calc.num1, user_calc.num2) << '\n';
-    }
-
+    std::cout << "num2 / num1 = " << user_calc.divide_2_1() << '\n';
 }
 
 
@@ -83,37 +84,44 @@ int main(int argc, char** argv) {
 
     Calculator user_calc;
 
+    int num1, num2;
+
     while (true) {
 
         std::cout << "Введите num1: ";
-        std::cin >> user_calc.num1;
+        std::cin >> num1;
+        user_calc.set_num1(num1);
+
         std::cout << '\n';
 
-        std::cout << "Введите num2: ";
-        std::cin >> user_calc.num2;
-        std::cout << '\n';
-
-        while (user_calc.set_num1(user_calc.num1) == false) {
+        while (user_calc.set_num1(num1) == false) {
 
             std::cout << "Неверный ввод!" << '\n';
 
             std::cout << "Введите num1: ";
-            std::cin >> user_calc.num1;
+            std::cin >> num1;
+            user_calc.set_num1(num1);
             std::cout << '\n';
 
         }
 
-        while (user_calc.set_num2(user_calc.num2) == false) {
+        std::cout << "Введите num2: ";
+        std::cin >> num2;
+        user_calc.set_num2(num2);
+        std::cout << '\n';
+
+        while (user_calc.set_num2(num2) == false) {
 
             std::cout << "Неверный ввод!" << '\n';
 
             std::cout << "Введите num2: ";
-            std::cin >> user_calc.num2;
+            std::cin >> num2;
+            user_calc.set_num2(num2);
             std::cout << '\n';
 
         }
 
-        print_user_calc(user_calc);
+        print_user_calc(user_calc, num1, num2);
 
 
     }
